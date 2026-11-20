@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hệ thiết kế (bố cục theo mẫu kolaiworkshop, tông XANH LÁ) — đổi màu thương hiệu ở đây.
+   Bản vàng-cam gốc: primary 42 100% 49%, accent 30 100% 50%, secondary 43 100% 96%, secondary-foreground 36 90% 33% */
+@layer base {
+  :root {
+    --background: 140 45% 97%;       /* nền xanh lá rất nhạt */
+    --foreground: 0 0% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --primary: 145 70% 38%;          /* xanh lá chính */
+    --primary-foreground: 0 0% 100%;
+    --accent: 165 85% 32%;           /* xanh ngọc (đầu kia của gradient) */
+    --accent-foreground: 0 0% 100%;
+    --secondary: 140 55% 92%;        /* xanh lá nhạt (nền khu xen kẽ) */
+    --secondary-foreground: 150 60% 24%; /* xanh lá đậm (chữ trên nền xanh) */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 30%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 140 20% 86%;
+    --radius: 0.75rem;
+
+    --gradient-hero: radial-gradient(ellipse at top, hsl(140 60% 88%) 0%, hsl(140 45% 97%) 60%, hsl(140 45% 97%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(140 70% 42%) 0%, hsl(165 85% 32%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(140 50% 96%) 100%);
+  }
+
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+}
+
+@layer components {
+  .btn-cta {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-cta-gradient px-6 py-4 text-center
+      text-base font-semibold uppercase leading-snug text-primary-foreground shadow-glow
+      transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-105
+      sm:px-10 sm:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-6 py-3
+      font-semibold text-secondary-foreground transition-colors duration-300 hover:bg-secondary;
+  }
+  .section-title {
+    @apply text-center text-3xl font-extrabold text-primary md:text-5xl;
+  }
+  .text-gradient {
+    @apply bg-cta-gradient bg-clip-text text-transparent;
+  }
+}
+
+/* Phần tử hiện dần khi cuộn tới */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity .6s ease-out, transform .6s ease-out; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
