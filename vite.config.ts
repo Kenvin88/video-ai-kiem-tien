@@ -2,11 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 
-// Web được đăng tại https://kenvin88.github.io/video-ai-kiem-tien/
-// Nếu sau này dùng tên miền riêng thì đổi base thành "/".
-export default defineConfig(({ command }) => ({
-  base: command === "build" ? "/video-ai-kiem-tien/" : "/",
+// Mặc định web chạy ở gốc tên miền (Vercel, tên miền riêng).
+// Bản GitHub Pages build bằng `npm run deploy` với --base=/video-ai-kiem-tien/
+export default defineConfig({
+  base: "/",
   plugins: [react()],
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   server: { port: 8080 },
-}));
+});
